@@ -4,88 +4,132 @@ nlu:
 - intent: greet
   examples: |
     - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - hola
+    - buenas
+    - buenos días
+    - buenas tardes
+    - buenas noches
+    - que onda
+    - que tal
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - adiós
+    - hasta luego
+    - hasta pronto
+    - hasta mañana
+    - nos vemos
+    - nos vemos pronto
+    - chao
+    - cuídate
+    - que tengas buena tarde
+    - que tengas un buen día
+    - hasta la próxima
+    - nos vemos más tarde
+    - que tengas buena noche
 
 - intent: affirm
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
+    - si
+    - s
+    - obviamiente
+    - por supuesto
     - that sounds good
-    - correct
+    - correcto
+    - de acuerdo
+    - estoy de acuerdo
+    - claro
+    - seguro
+    - claro que si
+    - efectivamente
+    - exactamente
+    - sin duda
+    - tienes razón
+    - estoy de acuerdo
+    - no cabe duda
 
 - intent: deny
   examples: |
     - no
     - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - nunca
+    - no creo
+    - ni hablar del caso
+    - ni modo
+    - ni por asomo
+    - de ninguna manera
+    - de ninguna forma
+    - jamás
+    - para nada
+    - no estoy de acuerdo
+    - no, gracias
+    - por supuesto que no
+    - que va
+    - ni en sueños
+    - na
+    - ni de casualidad
+    - ni en un millón de años
 
 - intent: mood_great
   examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+    - perfectamente
+    - genial
+    - increible
+    - maravillosamente
+    - maravilloso
+    - me siento bien
+    - me siento genial
+    - extremadamente bien
+    - super bien
+    - bien
+    - maravillosamente bien
+    - me siento fantástico
+    - no puedo estar mejor
+    - alegre
+    - super alegre
+    - contento 
+    - super contento
+    - expléndido
+    - de lujo
+    - todo perfecto
+    - todo bien
+    - de maravilla
+    - magnífico
+    - a gusto
+    - afortunado
 
 - intent: mood_unhappy
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - muy mal
+    - estoy hecho polvo
+    - no me siento muy bien
+    - me siento fatal
+    - me siento tenso
+    - tenso
+    - no me encuentro bien
+    - triste
+    - no estoy del todo bien
+    - super triste
+    - no estoy en mi mejor momento
+    - muy triste
+    - infeliz
+    - no muy bien
+    - mal
+    - me siento mal
+    - estoy un poco bajo de ánimo
+    - no estoy de humor
+    - desanimado 
+    - deprimido
+    - angustiado
+    - frustrado
+    - no me siento a gusto
+    - desilusionado
+    - decepcionado
+    - estoy indidpuesto
 
 - intent: bot_challenge
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - ¿eres un bot?
+    - ¿eres un humano?
+    - estoy hablando con un bot?
+    - estoy hablando con un humano?
