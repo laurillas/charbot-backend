@@ -11,3 +11,24 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Say what it is PBX
+  steps:
+  - intent: PBX
+  - action: utter_PBX
+
+- rule: Say what it is platel PBX
+  steps:
+  - intent: platel_PBX
+  - action: utter_platel_PBX
+
+- rule: Say how to access
+  steps:
+  - intent: access
+  - action: utter_access
+
+- rule: Say roles
+  steps:
+  - intent: roles
+  - action: utter_roles
+

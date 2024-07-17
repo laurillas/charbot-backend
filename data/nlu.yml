@@ -133,3 +133,34 @@ nlu:
     - ¿eres un humano?
     - estoy hablando con un bot?
     - estoy hablando con un humano?
+
+- intent: PBX
+  examples: |
+    - ¿qué es PBX?
+    - PBX
+
+- intent: platel_PBX
+  examples: |
+    - ¿qué es platel PBX?
+    - platel PBX
+
+- intent: access
+  examples: |
+    - ¿cómo acceder?
+
+- intent: roles
+  examples: |
+    - rol
+
+- intent: user
+  examples: |
+    - usuario 
+    
+- intent: administrator
+  examples: |
+    - administrador  
+    
+- intent: distributor
+  examples: |
+    - distribuidor   
+

@@ -8,6 +8,30 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - PBX
+  - platel_PBX
+  - access
+  - distributor
+  - administrator
+  - inform
+
+entities:
+  - rol:
+      roles:
+      - user
+
+slots:
+  slot_user:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: entity_roles
+        role: user
+
+
+
+
+
 
 responses:
   utter_greet:
@@ -30,6 +54,68 @@ responses:
 
   utter_iamabot:
   - text: "Soy un bot, desarrollado por Platel."
+
+  utter_PBX:
+  - text: "PBX (Private Branch Exchange) es una red telefónica privada utilizada dentro de una empresa. Los usuarios 
+  de un sistema telefónico PBX puede comunicarse de forma interna (dentro de la empresa) y externa (con el resto del 
+  mundo), usando diferentes canales de comunicación como voz sobre IP."
+
+  utter_platel_PBX:
+  - text: "PLATEL-PBX versión 4.0.0 es una solución integral de comunicaciones desarrollada sobre software libre, que 
+  ofrece servicios de voz, datos, video, mensajería unificada, seguridad, supervisión y notificaciones, usando protocolos 
+  estándares e interfaces flexibles, con la capacidad de interoperar con otros sistemas empresariales. Esta nueva versión 
+  permite la gestión y administración de PBX virtuales. Un PBX virtual es un sistema de PBX basado en internet, cien por
+  ciento en la nube, sin límites y fácil de instalar, que se puede adaptar a las necesidades de cada cliente. PLATEL 
+  proporciona flexibilidad, modularidad, seguridad y velocidad en los servicios publicados. Permite el consumo de los 
+  servicios mediante una única interfaz, así como su gestión, se pueden crear y configurar PBX virtuales con las 
+  características de cada empresa o institución, gestionar números virtuales, configurar servicios suplementarios, 
+  monitorear llamadas y registros de usuarios, configurar flujos de llamadas, entre otras opciones."
+
+  utter_access:
+  - text: "Para acceder al sistema el usuario debe introducir la dirección URL del mismo en el navegador web, ver figura 
+  1, y a continuación se oprime la tecla “Enter” del teclado."
+
+  utter_roles:
+  - text: "En la plataforma están definidos tres roles: Usuario, Distribuidor y Administrador."
+    buttons:
+    - title: "Usuario"
+      payload: '/access{{"rol":"user"}}'
+    - title: "Administrador"
+      payload: "/administrator"
+    - title: "Distribuidor"
+      payload: "/distributor"
+
+  utter_user:
+  - text: "Usuario es el rol que recibe el usuario final que va a interactuar con el sistema, este va a tener permisos 
+  solo a ver registros y reportes hechos por el sistema, no podrá cambiar las configuraciones de la PBX."
+
+  utter_distributor:
+  - text: "Distribuidor es el rol que se encarga de realizar las configuraciones básicas de la PBX según las necesidades 
+  de cada cliente o usuario final."
+
+  utter_administrator:
+  - text: "rol Administrador es el administrador general de la Plataforma y el que lleva el control y la responsabilidad 
+  de todas las configuraciones avanzadas del sistema."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 session_config:
   session_expiration_time: 60
