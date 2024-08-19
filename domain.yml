@@ -11,27 +11,44 @@ intents:
   - PBX
   - platel_PBX
   - access
-  - distributor
-  - administrator
+  - rol
   - inform
+  - account
+  - create_account
+  - edit_account
+  - delete_account
+  - number
+  - number_in_use
+  - number_repuesto
+  - inteligent_PBX
+  - user
+  - call
+  - device
+  - code
+  - voice_mail
+  - buzon
+  - conmutador
+  - callflowsng
+  - troncales_SIP
+  - monitor
+  - error
+  - groups
+  - principal_number
 
 entities:
-  - rol:
-      roles:
-      - user
+  - rol
 
 slots:
-  slot_user:
+  rol:
     type: text
     mappings:
       - type: from_entity
-        entity: entity_roles
-        role: user
+        entity: rol
 
-
-
-
-
+forms:
+  rol_info_form:
+    required_slots:
+      - rol
 
 responses:
   utter_greet:
@@ -75,19 +92,37 @@ responses:
   - text: "Para acceder al sistema el usuario debe introducir la dirección URL del mismo en el navegador web, ver figura 
   1, y a continuación se oprime la tecla “Enter” del teclado."
 
-  utter_roles:
+  utter_rol:
   - text: "En la plataforma están definidos tres roles: Usuario, Distribuidor y Administrador."
     buttons:
     - title: "Usuario"
-      payload: '/access{{"rol":"user"}}'
+      payload: '/inform{{"rol":"user"}}'
     - title: "Administrador"
-      payload: "/administrator"
+      payload: '/rol{{"rol":"administrator"}}'
     - title: "Distribuidor"
-      payload: "/distributor"
+      payload: '/rol{{"rol":"distributor"}}'
 
-  utter_user:
-  - text: "Usuario es el rol que recibe el usuario final que va a interactuar con el sistema, este va a tener permisos 
-  solo a ver registros y reportes hechos por el sistema, no podrá cambiar las configuraciones de la PBX."
+  utter_inform:
+    - condition:
+        - type: slot
+          name: rol
+          value: user
+      text: "Usuario es el rol que recibe el usuario final que va a interactuar con el sistema, este va a tener permisos 
+      solo a ver registros y reportes hechos por el sistema, no podrá cambiar las configuraciones de la PBX."
+
+#    - condition:
+#        - type: slot
+#          name: rol
+#          value: distribuidor
+#      text: "bbbbbbbb"
+#
+#    - condition:
+#        - type: slot
+#          name: rol
+#          value: administrador
+#      text: "aaaaaaaa"
+
+    - text: "Rol no definido"
 
   utter_distributor:
   - text: "Distribuidor es el rol que se encarga de realizar las configuraciones básicas de la PBX según las necesidades 
@@ -97,15 +132,555 @@ responses:
   - text: "rol Administrador es el administrador general de la Plataforma y el que lleva el control y la responsabilidad 
   de todas las configuraciones avanzadas del sistema."
 
+  utter_account:
+  - text: "Una vez autenticado en la Plataforma se puede acceder a la aplicación Cuentas (si se tienen los permisos para 
+  ello). Para acceder a la aplicación Cuentas debe seleccionar en el Panel superior derecho el ícono Aplicaciones y 
+  seleccionar la App Cuentas."
 
+  utter_create_account:
+  - text: "Para crear una nueva cuenta se selecciona la opción Añadir nueva cuenta, la cual muestra la interfaz para 
+  crear una nueva cuenta que se divide en 6 pasos."
 
+  utter_edit_account:
+    - text: "Para editar una cuenta, en la interfaz de Cuenta se selecciona la cuenta que desea editar y cliquea sobre 
+    el ícono   de las opciones que desee cambiar, ver figura 14. Luego se despliega un conjunto de opciones correspondiente. 
+    Para guardar los cambios debe seleccionar Guardar o Actualizar."
+      image: 'assets/figures/figure_14.jpg'
 
+  utter_edit_account_2:
+    - text: "Figura 14. Editar cuenta."
+      image: 'assets/figures/figure_15.png'
 
+  utter_delete_account:
+  - text: "Si desea eliminar la cuenta debe seleccionar la opción Estado de la cuenta (1) y seleccionar el botón Eliminar (2), ver figura 15. Inmediatamente se muestra un mensaje para confirmar la eliminación de la cuenta, donde debe escribir la palabra “ELIMINAR” (1) y luego seleccionar Eliminar cuenta (3), ver figura 16."
 
+  utter_number:
+  - text: "Para acceder a la aplicación Número Virtual debe seleccionar en el panel superior derecho el ícono Aplicaciones   
+  y seleccionar Números . Una vez seleccionado se muestra la página correspondiente, la cual se divide en Números de 
+  repuesto y Número en uso."
 
+  utter_number_in_use:
+  - text: "Es una lista que muestra dónde se usan los números en uso. "
 
+  utter_number_repuesto:
+  - text: "Es una lista donde se muestran los números de repuesto. Estos números son los cuales no han sido utilizados 
+  en ninguna parte de la cuenta y pueden ser asignados o eliminados a sus subcuentas. En caso que la lista esté vacía 
+  puede Comprar (2) nuevos números de repuesto para esta lista. También están las opciones Buscar (1), Puerto (3) y 
+  Sincronizar (4) que sincroniza el número con la base de datos."
 
+  utter_intelligent_PBX:
+  - text: "Para acceder a la aplicación PBX Inteligente debe seleccionar en el panel superior derecho el ícono 
+  Aplicaciones   y seleccionar el ícono perteneciente a PBX inteligente  . Luego se muestra su página con todas las 
+  opciones correspondientes: Tablero, Números, Usuarios, Grupos, Número principal, Llamadas, Dispositivos, Buzón de voz 
+  y Códigos."
 
+  utter_tablero:
+  - text: "El Tablero es una opción que muestra la gestión de la información de manera agradable a través de gráficos de 
+  pastel. En este se presentan los indicadores y datos fundamentales que el sistema monitoriza y analiza. 
+  El Tablero es una opción que muestra la gestión de la información de manera agradable a través de gráficos de pastel. 
+  En este se presentan los indicadores y datos fundamentales que el sistema monitoriza y analiza. Las opciones de la 
+  figura 20 permiten:
+  1-	Mostrar el audio seleccionado.
+  2-	Desplegar las opciones siguientes: 
+  2.1-	 Seleccionar de la PC el audio deseado.
+  2.2-	 Subir al sistema el audio seleccionado.
+  2.3-	 Cancelar la selección.
+  3-	Cancelar la operación por completo. 
+  4-	Guardar el audio seleccionado."
+
+  utter_user:
+  - text: "La opción Usuarios lista y muestra la cantidad de usuarios que se encuentran en el sistema, también, permite 
+  agregar nuevos usuarios, buscar el usuario que desee, configurar un usuario, sus extensiones, número de teléfono, 
+  dispositivos y características, ver figura 22.
+  Para buscar un usuario debe seleccionar la barra de búsqueda (2) ver figura 22, introducir el nombre o apellido del 
+  usuario que desee y presionar ENTER, inmediatamente mostrará una lista de usuarios que contienen la palabra introducida, 
+  ver figura 23.
+  En caso de que no coincida con ningún usuario, el sistema mostrará el mensaje “No se han encontrado datos que corresponden 
+  a su búsqueda”, ver figura 24.  
+  Si desea agregar nuevos usuarios debe seleccionar la opción Agregar usuario (1) ver figura 22, ésta mostrará un pequeño formulario con los datos necesarios a llenar, ver figura 25. 
+ 
+Figura 25. Agregar usuario.
+Si cliquea sobre el nombre del usuario en la columna perteneciente a Configuración se despliega la información de ese usuario, la cual puede ser editada, ver figura 26.
+ 
+Figura 26. Información de usuario.
+Las opciones de la figura 26 permiten:
+1-	Introducir nombre y apellido.
+2-	Mostrar y actualizar las credenciales (nombre de usuario y la contraseña) con la que se inició sesión, ver figura 27.
+ 
+Figura 27. Actualizar credenciales.
+3-	Mostrar y actualizar el número del buzón de voz, ver figura 28.
+ 
+Figura 28. Actualizar Número del buzón de voz.
+4-	Seleccionar el rol que desempeña este usuario (administrador o usuario).
+5-	Seleccionar zona horaria.
+6-	Seleccionar idioma.
+7-	Introducir tiempo de espera de la llamada en segundos.
+8-	 Introducir número de extensión principal. 
+9-	Seleccionar privacidad del identificador de llamadas (por defecto, no esconder nada, ocultar solo el número, ocultar solo en nombre, ocultar número y nombre).
+Si cliquea sobre el número de la extensión del usuario que se encuentra en la columna Extensiones se despliega una lista donde se encuentran los números de extensiones pertenecientes a ese usuario, también cuenta con la opción de añadir más extensiones, ver figura 29. En caso de que no exista ninguna extensión, mostrará el mensaje “Actualmente no hay ninguna extensión asignada a este usuario”, ver figura 30.
+ 
+Figura 29. Extensiones.
+ 
+Figura 30. No hay extensiones asignadas.
+Si cliquea sobre el número telefónico del usuario que se encuentra en la columna Números de teléfono se despliega una lista donde se encuentran los números de teléfono correspondientes a este usuario. También cuenta con la opción de añadir número de sobra y comprar números. En caso de que no existan números telefónicos almacenados, mostrará el mensaje “No hay números asignados a este usuario”, ver figura 31.
+ 
+Figura 31. Números telefónicos.
+Si cliquea sobre el campo que se encuentra en la columna Dispositivos se despliega una lista donde se encuentran los dispositivos pertenecientes a ese usuario, ver figura 32. También se pueden agregar dispositivos sobrantes, ver figura 33 y agregar un nuevo dispositivo directamente, ver figura 34. Para agregar un nuevo dispositivo debe llenar como mínimo los campos de las características básicas (figura 35 (1)), si desea ir más al detalle seleccione Avanzadas las cuales son en dependencia del tipo de dispositivo que desee agregar, ver figura 36 (2).  
+ 
+Figura 32. Dispositivos asignados.
+ 
+Figura 33. Lista de dispositivos de repuestos.
+ 
+Figura 34. Agregar nuevo dispositivo. 
+ 
+Figura 35. Características básicas de nuevos dispositivos.
+ 
+Figura 36. Opciones avanzadas.
+En caso de que no exista ningún dispositivo almacenado, mostrará el mensaje “No hay ningún dispositivo asignado a este usuario. ver figura 37. 
+ 
+Figura 37. No hay dispositivos.
+Si cliquea sobre el campo que se encuentra en la columna Características del usuario se muestran varias opciones que pueden ser activadas y desactivadas según desee, ver figura 38.
+ 
+Figura 38. Características del usuario.
+"
+
+  utter_groups:
+  - text: "La opción Grupos lista y muestra la cantidad de grupos que se encuentran en el sistema, también, permite agregar nuevos grupos (1), buscar el grupo que desee (2), configurar un grupo, sus miembros, extensión, número de teléfono y características, ver figura 39.
+ 
+Figura 39. Grupos.
+Si desea agregar nuevos grupos debe seleccionar la opción Agregar grupo (1) ver figura 39, ésta mostrará un pequeño formulario con los datos necesarios, ver figura 40.
+ 
+Figura 40. Crear nuevo grupo.
+Para buscar un grupo debe seleccionar la barra de búsqueda (2) ver figura 39, introducir el nombre del grupo, la extención o el número de télefono que desee y presionar ENTER, inmediatamente mostrará una lista con los grupos que contienen la palabra introducida, ver figura 41.
+ 
+Figura 41. Búsqueda de usuario.
+En caso de que no coincida con ningún grupo mostrará el mensaje “No hubo grupos que coinciden con su búsqueda”, ver figura 42.  
+ 
+Figura 42. Usuario no encontrado.
+Si cliquea sobre el nombre de un grupo en la columna perteneciente a Configuración se despliega la información de ese grupo, la cual puede ser configurada, ver figura 43.
+ 
+Figura 43. Configuración de grupos.
+Las opciones de la figura 43 permiten:
+1-	Introducir el nombre del grupo.
+2-	Introducir la cantidad de repeticiones de marcado.
+3-	Borrar Grupo.
+Para eliminar un grupo debe seleccionar la opción Borrar Grupo (3) ver figura 43, y se mostrará un mensaje de confirmación “Este grupo será borrado permanentemente. ¿Quieres continuar?” y las opciones Cancelar (1) y Aceptar (2), ver figura 44.
+ 
+Figura 44. Eliminar grupo.
+Si selecciona Ok (2) se muestra el mensaje informativo “Eliminado con éxito el grupo X”, ver figura 45. 
+ 
+Figura 45. Mensaje informativo al eliminar un mensaje.
+4-	Cancelar las operaciones realizadas.
+5-	Guardar los cambios realizados.
+Si cliquea sobre el número de miembros del grupo que se encuentra en la columna Miembros se despliega un esquema de barra (6) con la distribución en segundos por cada miembro del grupo, para que: en caso de llamar y no responder el primer miembro dado un tiempo determinado, la llamada se desvía al segundo miembro del grupo y así sucesivamente. También cuenta con las opciones: distribuir (1), eliminar un miembro del grupo (2), agregar usuario (3), cancelar (4) o guardar los cambios realizados (5) y cambiar la duración máxima del grupo de llamadas (7), ver figura 46.
+ 
+Figura 46. Miembros.
+Para adicionar un miembros al grupo se selecciona la opción (3) Agregar usuario de columna Miembro, ver figura 46. Se mostrará una ventana para seleccionar los usuarios que desea agregar en el grupo se cliquea la opción (5) Guardar.
+Para eliminar un miembro del grupo se selecciona el usuario que se desea eliminar y se cliquea la opción (2) Eliminar de la columna Miembro, ver figura 46. Automáticamente se elimina el usuario del grupo y debe seleccionar la opción (5) Guardar para guardar los cambios realizados en el grupo.
+Si cliquea sobre el número de la extensión del grupo que se encuentra en la columna Extensiones se despliega una lista donde se encuentran los números de extensiones pertenecientes a ese grupo. También cuenta con las opciones: sin asignación (1) que elimina la extensión existente, agregar extensión (2), cancelar (3) y guardar los cambios realizados (4), ver figura 47. En caso de que no existan números telefónicos almacenados, mostrará el mensaje “Actualmente no hay ninguna extensión asignada a este grupo”, ver figura 48.
+ 
+Figura 48. Extensión de un grupo.
+ 
+Figura 49. Grupo sin extensión.
+Si cliquea sobre el número telefónico del grupo que se encuentra en la columna Números de teléfono se despliega una lista donde se encuentran los números de teléfono correspondientes a este grupo. También cuenta con las opciones: sin asignación (1) que elimina la extensión existente, agregar desde números de repuesto (2), comprar números (3), un ícono para indicar si es local (4), ajustes (5) (que permiten configurar el prefijo del número, cambiar el módulo operador y sincronizar con el sistema), cancelar (6) y guardar (7), ver figura 49. 
+ 
+Figura 50. Números telefónicos de un grupo.
+Si cliquea sobre el campo que se encuentra en la columna Características del grupo se muestran varias opciones que pueden ser activadas o desactivadas según desee, ver figura 50.
+ 
+Figura 51. Características del grupo.
+"
+
+  utter_principal_number:
+  - text: "Número principal muestra las opciones: (ver figura 51)
+ 
+Figura 52. Número principal.
+1-	Números principales de la empresa(1), cuenta con las opciones: Sin asignación (1)  que permite eliminar los números existentes, Agregar desde números de repuesto (2) agrega él o los números principales de la empresa desde los números de repuesto, Comprar números (3), Ajustes (4) que permiten seleccionar el nombre del identificador de llamadas, editar ubicación, configurar el prefijo del número cambiar el nombre del módulo operador, sincronizar el sistema y Cerrar (5), ver figura 52. Si no hay ningún número el sistema mostrará el mensaje “Por favor agregar o comprar un número de los enlaces de abajo para continuar.”, ver figura 53. 
+ 
+Figura 53. Números principales.
+ 
+Figura 54. No existe número principal.
+2-	Estrategia de horas de oficina, aquí debe seleccionar como manejar las llamadas entrantes según el horario, ver figura 54.
+ 
+Figura 55. Horario de oficina.
+3-	Días festivos en la oficina, si selecciona la opción “¿Cierran para vacaciones?” debe agregar la fecha de las vacaciones, ver figura 55.
+ 
+Figura 56. Días festivos.
+4-	Gestión de llamadas entrantes, aquí debe seleccionar cómo desea que lleguen las llamadas, ver figura 56.
+ 
+Figura 57. Gestión de llamadas.
+5-	Número de conferencia principal, cuenta con las opciones: Sin asignación (1)  que permite eliminar los números existentes, Saludo personalizado (2) si es activado debe escribir un mensaje de saludo el cual será escuchado mediante la función de texto a voz, ver figura 57 y 58, Agregar desde números de repuesto (2) agrega él o los números principales de la empresa desde los números de repuesto, Comprar números (3), y Cerrar (5), ver figura 54. Si no hay ningún número el sistema mostrará el mensaje “Agregue un número de conferencia principal”, ver figura 59. 
+ 
+Figura 58. Número de conferencia principal.
+ 
+ 
+Figura 59. Saludo de conferencia.
+ 
+Figura 60. No existe número de conferencia principal.
+6-	Número de buzón de fax principal, esta permite agregar él o los números principales para el buzón de fax desde los números de repuesto y comprar números. Si no hay número agregado mostrará un mensaje “Por favor, agregue un número de fax principal”, ver figura 60.
+ 
+Figura 61. Número de buzón de fax.
+Número principal muestra las opciones: (ver figura 51)
+ 
+Figura 52. Número principal.
+1-	Números principales de la empresa(1), cuenta con las opciones: Sin asignación (1)  que permite eliminar los números existentes, Agregar desde números de repuesto (2) agrega él o los números principales de la empresa desde los números de repuesto, Comprar números (3), Ajustes (4) que permiten seleccionar el nombre del identificador de llamadas, editar ubicación, configurar el prefijo del número cambiar el nombre del módulo operador, sincronizar el sistema y Cerrar (5), ver figura 52. Si no hay ningún número el sistema mostrará el mensaje “Por favor agregar o comprar un número de los enlaces de abajo para continuar.”, ver figura 53. 
+ 
+Figura 53. Números principales.
+ 
+Figura 54. No existe número principal.
+2-	Estrategia de horas de oficina, aquí debe seleccionar como manejar las llamadas entrantes según el horario, ver figura 54.
+ 
+Figura 55. Horario de oficina.
+3-	Días festivos en la oficina, si selecciona la opción “¿Cierran para vacaciones?” debe agregar la fecha de las vacaciones, ver figura 55.
+ 
+Figura 56. Días festivos.
+4-	Gestión de llamadas entrantes, aquí debe seleccionar cómo desea que lleguen las llamadas, ver figura 56.
+ 
+Figura 57. Gestión de llamadas.
+5-	Número de conferencia principal, cuenta con las opciones: Sin asignación (1)  que permite eliminar los números existentes, Saludo personalizado (2) si es activado debe escribir un mensaje de saludo el cual será escuchado mediante la función de texto a voz, ver figura 57 y 58, Agregar desde números de repuesto (2) agrega él o los números principales de la empresa desde los números de repuesto, Comprar números (3), y Cerrar (5), ver figura 54. Si no hay ningún número el sistema mostrará el mensaje “Agregue un número de conferencia principal”, ver figura 59. 
+ 
+Figura 58. Número de conferencia principal.
+ 
+ 
+Figura 59. Saludo de conferencia.
+ 
+Figura 60. No existe número de conferencia principal.
+6-	Número de buzón de fax principal, esta permite agregar él o los números principales para el buzón de fax desde los números de repuesto y comprar números. Si no hay número agregado mostrará un mensaje “Por favor, agregue un número de fax principal”, ver figura 60.
+ 
+Figura 61. Número de buzón de fax.
+"
+
+  utter_call:
+  - text: "La opción Llamadas muestra el registro de las llamadas realizadas con las siguientes opciones: (ver figura 61)
+ 
+  Figura 62. Registro de llamadas.
+  1-	El registro de llamadas realizadas presenta las opciones de mostrar las llamadas hechas Hoy, Esta semana, Este mes y Personalizar.
+  2-	En la sección Personalizar puede seleccionar un intervalo de tiempo para mostrar las llamadas realizadas en el tiempo seleccionado. En la sección Esta semana y Este mes solo muestra la fecha (Mostrando llamadas de 06/19/2023 a 06/22/2023)
+  3-	Una vez seleccionada la fecha que desee, debe hacer clic en el botón Filtrar y la lista se actualizará con la información que necesita.
+  4-	Si selecciona el botón Descargar puede descargar en .csv la información.
+  5-	Si desea buscar una llamada puede introducir el nombre de usuario, la fecha, hora desde dónde se realizó y a dónde y mostrará las llamadas que desee.
+  6-	Muestra la hora y la fecha en la que se realizó la llamada.
+  7-	Muestra desde dónde se realizó la llamada mediante el número de extensión o el nombre de usuario o ambos.
+  8-	Muestra a dónde se realizó la llamada mediante el número de extensión.
+  9-	Muestra la duración de la llamada.
+  10-	 Muestra cómo se desarrolló la llamada, si terminó normalmente u ocurrió algún error.
+  11-	 En columna Acciones, el ícono permite enviar un correo electrónico. 
+  12-	El ícono      muestra los detalles técnicos de una llamada.
+  "
+
+  utter_devise:
+  - text: "La opción Dispositivos lista y muestra la cantidad de dispositivos que se encuentran en el sistema, también, 
+  permite agregar nuevos dispositivos (1), buscar el dispositivo que desee (2), encender o apagar el dispositivo (3) y 
+  editar cada dispositivo (4), ver figura 62.
+ 
+  Figura 63. Dispositivos.
+  Si desea agregar nuevos dispositivos debe seleccionar la opción Agregar dispositivo (1) en la figura 63, ésta mostrará 
+  todos los dispositivos que se pueden agregar para que escoja el que desee, ver figura 64. Una vez seleccionado un 
+  dispositivo se mostrará un pequeño formulario a llenar con los datos necesarios divido en Características básicas, ver 
+  figura 35 y Avanzadas para opciones más detalladas, ver figura 36. 
+   
+  Figura 64. Agregar dispositivos."
+
+  utter_buzon:
+  - text: "La opción Buzones de voz lista y muestra la cantidad de buzones de voz que se encuentran en el sistema, también, permite agregar nuevos buzones de voz (1), buscar (2) el buzón que desee y editar (3) cada buzón existente, ver figura 64.
+ 
+  Figura 65. Buzones.
+  Si desea agregar nuevos buzones de voz debe seleccionar la opción Agregar buzón de voz (1) ver figuras 64 y 65, ésta última mostrará un pequeño formulario a llenar con los datos necesarios Ajustes básicos (1) y el botón Avanzado (2) para opciones más detalladas, ver figura 66. 
+   
+  Figura 66. Agregar buzón.
+   
+  Figura 67. Opciones avanzadas."
+
+  utter_code:
+  - text: "La opción Códigos es una página informativa muestra los códigos numéricos con su función para realizar desvío de llamada, compartir escritorio, estacionar y recuperar llamada y otras opciones, ver figura 67. 
+ 
+  Figura 68. Códigos."
+
+  utter_registro:
+  - text: "Para acceder a la aplicación Registros debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Registros    . Luego se muestran los registros de las llamadas que se han realizado en la PBX, ver figura 68.
+ 
+  Figura 69. Registros.
+  Las opciones de la figura 68 permiten:
+  1.	Buscar un registro determinado.
+  2.	Cambiar opciones de cantidad de registros a mostrar por páginas, ver figura 69.
+   
+  Figura 70. Opciones.
+  3.	Ocultar panel izquierdo.
+  4.	Mostrar detalles del registro como se muestra en la figura 70.
+   
+  Figura 71. Detalles del Registro.
+  "
+
+  utter_conmutadores:
+  - text: "Para acceder a la aplicación Conmutadores debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Conmutadores . Luego se muestran los registros de las llamadas que se han realizado en la PBX, ver figura 71.
+ 
+  Figura 72. Conmutadores.
+  "
+
+  utter_voice_mail:
+  - text: "Para acceder a la aplicación correos de voz debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Correos de voz  . Luego se muestra un mensaje informativo con la cantidad de buzones de voz que se han creado en la PBX y un campo desglosable que lista estos buzones para seleccionar uno de ellos. Una vez seleccionado un buzón se muestra la información de dicho buzón la cual puede ser actualizada, filtrada, buscada y eliminada ver figura 72.
+  Figura 73. Buzón de voz.
+  "
+
+  utter_callflowsng:
+  - text: "5.8 Callflowsng
+  Para acceder a la aplicación flujo de llamadas debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Callflowsg  . Luego se muestra un conjunto de opciones a configurar, ver figura 73.
+   
+  Figura 74. Menú principal de flujo de llamadas.
+  
+  5.8.1	Flujos   
+  El flujo de llamadas define que sucede cuando alguien marca a una extensión o un número telefónico. Al seleccionar la opción Flujos se muestra: Buscar (1), Agregar flujo de llamadas (2), Volver a Inicio de Flujos de llamadas (3) y una pequeña explicación de que es un flujo de llamada (4), ver figura 74.
+   
+  Figura 75. Flujo de llamadas.
+  Para agregar un flujo de llamadas debe seleccionar Agregar flujo de llamadas (2) ver figura 74, inmediatamente se muestra la interfaz con tres campos Eliminar el flujo de llamadas (1), Guardar cambios (2), y Flujo de llamada (3). Para agregar un número debe seleccionar “Haga clic para añadir número” (4) ver figura 75, y se mostrará un pequeño formulario donde puede seleccionar un número y una extensión, ver figura 76. 
+  Si desea editar el nombre del flujo de llamada seleccione el ícono   (3), ver figura 75 se mostrará un pequeño formulario a llenar, ver figura 77. 
+  En la parte derecha de la interfaz se muestran las Acciones (5) ver figura 75, las cuales para agregarlas a la llamada debe seleccionar una acción y arrastrarlas hasta ella. 
+  Una vez creado un flujo de llamada se lista debajo de la opción Añadir flujo de llamada y al seleccionarlo puede editarlo o eliminarlo, ver figura 78.
+  
+   
+  Figura 76. Agregar flujo de llamadas.
+   
+  Figura 77. Agregar número.
+   
+  Figura 78. Editar nombre del flujo de llamadas.
+  Una vez creado se lista debajo de la opción Añadir (2), ver figura 73 y al seleccionarlo puede editarlo o eliminarlo.
+   
+  Figura 79. Ejemplo de flujo de llamada.
+  5.8.2	Ajustes de la cuenta
+  Al seleccionar la opción Configuraciones de la cuenta se muestran tres secciones:
+  -	 Identificador de llamadas presenta un formulario a completar con la información necesaria sobre los identificadores de llamadas, ver figura 79.
+  -	Lista negra muestra dos columnas, la que se encuentra en la parte izquierda busca los números telefónicos disponibles para seleccionarlos y agregarlos a la lista negra, y la columna de la parte derecha plasma los teléfonos que se encuentran ya añadidos a la lista negra, ver figura 80.
+  -	Misceláneos presenta un formulario a llenar con la información necesaria sobre la música en espera de la cuenta, ver figura 81.
+   
+  Figura 80. Identificador de llamadas.
+   
+  Figura 81. Lista negra.
+  
+   
+  Figura 82. Misceláneos.
+  5.8.3	Códigos de alimentación
+  Al seleccionar la opción Código de funciones se muestran y actualizan los prefijos de los desvíos de llamadas, escritorios compartidos, estacionamientos y otros, ver figura 82.
+   
+  Figura 83. Códigos.
+  5.8.4	Buzones de fax
+  Al seleccionar la opción Buzones de fax se muestra: Buscar (1), Añadir (2), Volver a Inicio de Flujos de llamadas (3), ver figura 83. 
+   
+  Figura 84. Cajas de fax.
+  Para crear un buzón de fax debe seleccionar Añadir (2), ver figura 83. Luego se muestra la interfaz Crear buzón de fax, ver figura 84. Donde existen las opciones Básico (1), ver figura 84 y Avanzado (2), ver figura 85. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 85. Opciones básicas.
+   
+  Figura 86. Opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.5	Conferencia
+  Al seleccionar la opción Conferencia se muestra: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 86. 
+   
+  Figura 87. Conferencia.
+  Para crear una nueva conferencia debe seleccionar la opción Añadir (2), ver figura 87. Inmediatamente se muestran las opciones correspondientes que se dividen en Básico (1), ver figura 87 y Avanzado (2), ver figura 88. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 88. Crear conferencia. Opciones básicas.
+   
+  Figura 89. Crear Conferencia. Opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.6	Conjuntos de hora del día
+  Al seleccionar la opción Conjuntos de hora del día se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 89. 
+   
+  Figura 90. Conjuntos de hora del día.
+  Para crear un nuevo conjunto de horas del día debe seleccionar la opción Añadir (2), ver figura 89. Inmediatamente se muestran los campos, ver figura 90:
+   
+  Figura 91. Crear conjunto de horas del día.
+  1-	Nombre: debe nombrar el nuevo conjunto de horas. 
+  2-	Reglas no seleccionadas: debe seleccionar la regla que desee y deslizarla al otro campo.
+  3-	Reglas seleccionadas: son las reglas que contiene el conjunto que está creando.
+  4-	Guardar.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.7	Directorio
+  Al seleccionar la opción Directorio se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 91. 
+   
+  Figura 92. Directorio.
+  Para crear un nuevo directorio debe seleccionar la opción Añadir (2), ver figura 91. Inmediatamente se muestran las opciones correspondientes que se dividen en Básico (1), ver figura 92 y Avanzado (2), ver figura 93. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 93. Crear directorio. Opciones básicas.
+   
+  Figura 94. Crear directorio. Opciones avanzadas.
+  Una vez creado el directorio se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.8	Dispositivo
+  Al seleccionar la opción Dispositivo se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 94. 
+   
+  Figura 95. Directorio.
+  Para crear un nuevo dispositivo debe seleccionar la opción Añadir (2), ver figura 94. Inmediatamente se muestran las opciones correspondientes en la parte superior hay una barra con los tipos de dispositivos (1), al seleccionarlos se muestran el formulario que le corresponde a cada uno, dividido en Básico (2), ver figura 95 y Avanzado (3), ver figura 96. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 96. Agregar dispositivo. Opciones básicas.
+   
+  Figura 97. Agregar dispositivo. Opciones avanzadas.
+  Una vez creado el dispositivo se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.9	Grupos
+  Al seleccionar la opción Grupo se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 97. 
+   
+  Figura 98. Grupos.
+  Para crear un nuevo grupo debe seleccionar la opción Añadir (2), ver figura 97. Inmediatamente se muestran las opciones correspondientes y necesarias para crear un grupo, ver figura 98. 
+   
+  Figura 99. Crear grupo.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.10	 Hora del día
+  Al seleccionar la opción Hora del día se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 99. 
+   
+  Figura 100. Hora del día.
+  Para crear una nueva hora del día debe seleccionar la opción Añadir (2), ver figura 99. Inmediatamente se muestran las opciones correspondientes y necesarias para crearla, ver figura 100. 
+   
+  Figura 101. Crear tiempo del día.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.11	 Lista negra
+  Al seleccionar la opción Lista negra se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 101. 
+   
+  Figura 102. Lista negra.
+  Para crear una nueva lista negra debe seleccionar la opción Añadir (2), ver figura 101. Inmediatamente se muestran las opciones correspondientes y necesarias para crearla, ver figura 102.
+   
+  Figura 103. Crear lista negra. 
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.12	 Reproducir Medios
+  Al seleccionar la opción Media se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 103. 
+   
+  Figura 104. Media.
+  Para crear medios debe seleccionar la opción Añadir (2), ver figura 103. Inmediatamente se muestran las opciones correspondientes, divididas en Básico (1), ver figura 104 y Avanzado (2), ver figura 105. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 105. Creando medios. Opciones básicas.
+   
+  Figura 106. Creando medios. Opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.13	 Correo de voz
+  Al seleccionar la opción Mensaje de voz se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 106. 
+   
+  Figura 107. Mensaje de voz.
+  Para crear mensajes de voz debe seleccionar la opción Añadir (2), ver figura 106. Inmediatamente se muestran las opciones correspondientes, divididas en Básico (1), ver figura 107 y Avanzado (2), ver figura 108. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 108. Creando correo de buzón de voz. Opciones básicas.
+   
+  Figura 109. Creando buzón de correo de voz. Opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir seleccionarlo puede editarlo o eliminarlo.
+  5.8.14	 Menú
+  Al seleccionar la opción Menú se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 109. 
+   
+  Figura 110. Menú.
+  Para crear un menú debe seleccionar la opción Añadir (2), ver figura 109. Inmediatamente se muestran las opciones correspondientes, divididas en Básico (1), ver figura 110 y Avanzado (2), ver figura 111. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 111. Crear menú. Opciones básicas.
+   
+  Figura 112. Crear menú. Opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  5.8.15	 Usuario
+  Al seleccionar la opción Usuarios se muestran las opciones: Buscar (1), Añadir (2), Volver a la página de inicio de Flujos de llamadas (3), ver figura 112. 
+   
+  Figura 113. Usuarios.
+  Para crear un usuario debe seleccionar la opción Añadir (2), ver figura 112. Inmediatamente se muestran las opciones correspondientes, divididas en Básico (1), ver figura 113 y Avanzado (2), ver figura 114. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   Figura 114. Crear usuario. Opciones básicas.
+   
+  Figura 115. Creando usuario. Algunas opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  "
+
+  utter_trocales:
+  - text: "5.9 Troncales SIP
+  Para acceder a la aplicación Troncales SIP debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Troncales SIP . Luego se muestra un conjunto de recursos para configurar, ver figura 115.
+   
+  Figura 116. Troncales SIP.
+  5.9.1	Recurso local
+  Al seleccionar la opción Recursos locales se muestran las opciones: Buscar (1), Añadir (2), Regresar a la casa de los recursos (3), ver figura 116.
+   
+  Figura 117. Recursos locales.
+  Para crear una puerta de entrada menú debe seleccionar la opción Añadir (2), ver figura 116. Inmediatamente se muestran las opciones correspondientes, divididas en Básico (1), ver figura 117 y Avanzado (2), ver figura 118. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+   
+  Figura 118. Añadir puerta de entrada. Opciones básicas.
+   
+  Figura 119. Añadir puerta de entrada. Opciones avanzadas.
+  Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
+  "
+
+  utter_csv:
+  - text: "Para acceder a la aplicación Incorporación de CSV debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Incorporación de CSV . Al mostrarse la interfaz correspondiente debe seleccionar una de las dos opciones Agregar usuario (1) o Agregar usuarios y dispositivos (2) ver figura 119.
+   
+  Figura 120. Interfaz principal de incorporación de CSV.
+  5.10.1	Agregar usuario
+  Si selecciona Añadir un usuario debe cargar el archivo CSV con los datos requeridos. El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación tal y como se explica en la interfaz, ver figura 120.
+   
+  Figura 121. Añadir usuario.
+  A la hora de crear el documento Exel con la información requerida debe guardarlo como tipo CSV para que cargue correctamente en el sistema, ver figura 121 y 122.
+   
+  Figura 122. Ejemplo de cómo debe ir estructurada la información en el Excel.
+   
+  Figura 123. Modificar e tipo de archivo .excel a .csv
+  Una vez cargado el documento en el sistema se muestra la información en columnas, ver figura 123 (1). Donde debe escoger la correspondencia de cada uno de los encabezados de las columnas, ver figura 123 (2 y 3).  Una vez este todo correcto se activará el botón Proceder, ver figura 123 (4).
+   
+  Figura 124.Cargar y configurar la información del archivo CSV en el sistema.
+  Luego de seleccionar el botón Probar se almacenará la información correctamente en el sistema, mostrando el mensaje ¡Su importación CSV se ha completado!, ver figura 124.
+   
+  Figura 125.  Mensaje de confirmación importación CSV exitosa.
+  Para verificar que la información ha sido importada debe acceder a la app PBX Inteligente a la opción Usuarios y Grupos y se mostrará en el listado de usuarios y grupos la información correspondiente. 
+  5.10.2 Agregar usuarios y dispositivos
+  Para Añadir un usuario y dispositivo (2), ver figura 119 debe cargar el archivo CSV con los datos requeridos. El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación tal y como se explica en la interfaz, ver figura 125. Llevar acabo el mismo procedimiento para Añadir un usuario descrito anteriormente. 
+   
+  Figura 126. Agregar usuarios y dispositivos
+  Para acceder a la aplicación Incorporación de CSV debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Incorporación de CSV . Al mostrarse la interfaz correspondiente debe seleccionar una de las dos opciones Agregar usuario (1) o Agregar usuarios y dispositivos (2) ver figura 119.
+   
+  Figura 120. Interfaz principal de incorporación de CSV.
+  5.10.1	Agregar usuario
+  Si selecciona Añadir un usuario debe cargar el archivo CSV con los datos requeridos. El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación tal y como se explica en la interfaz, ver figura 120.
+   
+  Figura 121. Añadir usuario.
+  A la hora de crear el documento Exel con la información requerida debe guardarlo como tipo CSV para que cargue correctamente en el sistema, ver figura 121 y 122.
+   
+  Figura 122. Ejemplo de cómo debe ir estructurada la información en el Excel.
+   
+  Figura 123. Modificar e tipo de archivo .excel a .csv
+  Una vez cargado el documento en el sistema se muestra la información en columnas, ver figura 123 (1). Donde debe escoger la correspondencia de cada uno de los encabezados de las columnas, ver figura 123 (2 y 3).  Una vez este todo correcto se activará el botón Proceder, ver figura 123 (4).
+   
+  Figura 124.Cargar y configurar la información del archivo CSV en el sistema.
+  Luego de seleccionar el botón Probar se almacenará la información correctamente en el sistema, mostrando el mensaje ¡Su importación CSV se ha completado!, ver figura 124.
+   
+  Figura 125.  Mensaje de confirmación importación CSV exitosa.
+  Para verificar que la información ha sido importada debe acceder a la app PBX Inteligente a la opción Usuarios y Grupos y se mostrará en el listado de usuarios y grupos la información correspondiente. 
+  5.10.2 Agregar usuarios y dispositivos
+  Para Añadir un usuario y dispositivo (2), ver figura 119 debe cargar el archivo CSV con los datos requeridos. El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación tal y como se explica en la interfaz, ver figura 125. Llevar acabo el mismo procedimiento para Añadir un usuario descrito anteriormente. 
+   
+  Figura 126. Agregar usuarios y dispositivos
+  "
+
+  utter_monitor:
+  - text: "La app Monitor permite acceder a Grafana un software libre que permite la visualización y el formato de datos métricos a través de gráficos. 
+  En la figura 126 se muestra el Panel de Control donde se puede escoger los distintos gráficos informativos, ver figura 127.
+   
+  Figura 127. Panel de Control.
+   
+  Figura 128. Gráficos.
+  "
+
+  utter_error:
+  - text: "Con el objetivo de garantizar que la información almacenada en el sistema sea útil para el análisis, se establecen reglas asociadas al proceso, formato y sintaxis, las cuales serán especificadas en este acápite. 
+  Teniendo en cuenta que estos errores se manifiestan de la misma forma en las funcionalidades del sistema, independientemente del dato que se esté registrando, en este manual se explica un ejemplo para cada tipo de error.
+  6.1.	 Error de credenciales
+  Tanto para acceder al sistema, como para realizar algunas operaciones dentro del mismo, se solicita la autenticación del usuario, para lo cual se requiere que introduzca el nombre de usuario, la contraseña y el nombre de la cuenta. En cada uno de estos casos el sistema verifica la validez de la información introducida y en caso de que alguno de los campos sea incorrecto muestra el error “Credenciales no válidas”, ver figura 128.
+   
+  Figura 129. Error Credenciales no válidas.
+  
+  6.2.	Errores en los valores de los campos.
+  En el sistema existen varios campos donde se debe introducir una dirección de correo electrónico, en caso de introducir un valor incorrecto se mostrará el mensaje “Por favor, introduce una dirección de correo electrónico válida”, ver figura 129. 
+   
+  Figura 130. Error en dirección de correo electrónico.
+  Cuando se dejan campos obligatorios vacíos el sistema muestra el error “Este campo es necesario” en la interfaz en la parte posterior del campo, ver Figura 130.
+   
+  Figura 131. Error Campos vacíos. 
+  Cuando el valor del campo es incorrecto, pero se valida después de mandar la información al sistema, es decir en la interfaz después de seleccionar el botón “Guardar”, se mostrará un mensaje de error como se muestra en la figura 131.
+  
+   
+  Figura 132. Error al guardar datos inválidos.
+  6.3.	Otros errores.
+  •	Cuando se accede desde el navegador y el certificado del sitio no es emitido por alguna entidad reconocida por el navegador se mostrará una advertencia de seguridad, ver figura 132.
+   
+  Figura 133. Advertencia de seguridad.
+  •	Cuando el servidor web no se puede conectar a la base de datos, el sistema mostrará un error, ver figura 133.
+   
+  Figura 134. Error del sistema.
+  
+  "
 
 
 

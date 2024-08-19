@@ -27,8 +27,177 @@ rules:
   - intent: access
   - action: utter_access
 
-- rule: Say roles
+- rule: Say rol
   steps:
-  - intent: roles
-  - action: utter_roles
+  - intent: rol
+  - action: utter_rol
+
+- rule: choose rol
+  steps:
+  - intent: inform
+    entities:
+      - rol: user
+  - action: utter_inform
+
+- rule: Say account
+  steps:
+  - intent: account
+  - action: utter_account
+
+- rule: Say how to create an account
+  steps:
+  - intent: create_account
+  - action: utter_create_account
+
+- rule: Say how to edit an account
+  steps:
+  - intent: edit_account
+  - action: utter_edit_account
+  - action: utter_edit_account_2
+
+- rule: Say how to delete an account
+  steps:
+  - intent: delete_account
+  - action: utter_delete_account
+
+- rule: Say number
+  steps:
+  - intent: number
+  - action: utter_number
+
+- rule: Say number in use
+  steps:
+  - intent: number_in_use
+  - action: utter_number_in_use
+
+- rule: Say number_repuesto
+  steps:
+  - intent: number_repuesto
+  - action: utter_number_repuesto
+
+- rule: Say intelligent_PBX
+  steps:
+  - intent: intelligent_PBX
+  - action: utter_intelligent_PBX
+
+- rule: Say tablero
+  steps:
+  - intent: tablero
+  - action: utter_tablero
+
+- rule: Say user
+  steps:
+  - intent: user
+  - action: utter_user
+
+- rule: Say groups
+  steps:
+  - intent: groups
+  - action: utter_groups
+
+- rule: Say principal_number
+  steps:
+  - intent: principal_number
+  - action: utter_principal_number
+
+- rule: Say call
+  steps:
+  - intent: call
+  - action: utter_call
+
+- rule: Say devise
+  steps:
+  - intent: devise
+  - action: utter_devise
+
+- rule: Say buzon
+  steps:
+  - intent: buzon
+  - action: utter_buzon
+
+- rule: Say code
+  steps:
+  - intent: code
+  - action: utter_code
+
+- rule: Say registro
+  steps:
+  - intent: registro
+  - action: utter_registro
+
+- rule: Say conmutadores
+  steps:
+  - intent: conmutadores
+  - action: utter_conmutadores
+
+- rule: Say voice_mail
+  steps:
+  - intent: voice_mail
+  - action: utter_voice_mail
+
+- rule: Say callflowsng
+  steps:
+  - intent: callflowsng
+  - action: utter_callflowsng
+
+- rule: Say trocales
+  steps:
+  - intent: trocales
+  - action: utter_trocales
+
+- rule: Say csv
+  steps:
+  - intent: csv
+  - action: utter_csv
+
+- rule: Say monitor
+  steps:
+  - intent: monitor
+  - action: utter_monitor
+
+- rule: Say error
+  steps:
+  - intent: error
+  - action: utter_error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

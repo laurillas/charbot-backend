@@ -148,19 +148,58 @@ nlu:
   examples: |
     - ¿cómo acceder?
 
-- intent: roles
+- intent: rol
   examples: |
     - rol
+    - roles
 
-- intent: user
-  examples: |
-    - usuario 
-    
-- intent: administrator
-  examples: |
-    - administrador  
-    
-- intent: distributor
-  examples: |
-    - distribuidor   
+#- intent: inform
+#  examples: |
+#    - user
+#    - distribuidor
+#    - administrador
 
+#- intent: user
+#  examples: |
+#    - usuario
+#
+#- intent: administrator
+#  examples: |
+#    - administrador
+#
+#- intent: distributor
+#  examples: |
+#    - distribuidor
+
+- intent: create_account
+  examples: |
+    - crear cuenta
+    - ¿cómo puedo crearme una cuenta?
+    - ¿cómo puedo abrirme una cuenta?
+    - ¿cómo me registro?
+    - ¿Cuáles son los requisitos para crearme una cuenta?
+    - ¿Puedes explicarme el proceso de creación de una cuenta?
+
+- intent: edit_account
+  examples: |
+    - editar cuenta
+    - modificar cuenta
+    - actualizar cuenta
+
+- intent: delete_account
+  examples: |
+    - eliminar cuenta
+    - quiero eliminar mi cuenta
+    - ¿cómo puedo eliminar mi cuenta?
+    - cerrar cueta
+    - quiero cerrar mi cuenta
+    - ¿cómo puedo cerrar mi cuenta?
+    - cancelar cuenta
+    - dar de baja mi cueta
+    - ¿cómo dar de baja mi cuenta?
+    - ¿cómo puedo eliminar mi perfil?
+
+- intent: number
+  examples: |
+    - número
+    -
