@@ -36,13 +36,14 @@ rules:
   steps:
   - intent: inform
     entities:
-      - rol: user
+      - rol: distribuidor
   - action: utter_inform
 
 - rule: Say account
   steps:
   - intent: account
   - action: utter_account
+  - action: utter_account_2
 
 - rule: Say how to create an account
   steps:
@@ -59,6 +60,7 @@ rules:
   steps:
   - intent: delete_account
   - action: utter_delete_account
+  - action: utter_delete_account_2
 
 - rule: Say number
   steps:
@@ -142,8 +144,8 @@ rules:
 
 - rule: Say trocales
   steps:
-  - intent: trocales
-  - action: utter_trocales
+  - intent: troncales
+  - action: utter_troncales
 
 - rule: Say csv
   steps:

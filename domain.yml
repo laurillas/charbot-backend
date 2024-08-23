@@ -27,9 +27,10 @@ intents:
   - code
   - voice_mail
   - buzon
+  - registro
   - conmutador
   - callflowsng
-  - troncales_SIP
+  - troncales
   - monitor
   - error
   - groups
@@ -97,10 +98,10 @@ responses:
     buttons:
     - title: "Usuario"
       payload: '/inform{{"rol":"user"}}'
-    - title: "Administrador"
-      payload: '/rol{{"rol":"administrator"}}'
     - title: "Distribuidor"
-      payload: '/rol{{"rol":"distributor"}}'
+      payload: '/inform{{"rol":"distributor"}}'
+    - title: "Administrador"
+      payload: '/inform{{"rol":"administrator"}}'
 
   utter_inform:
     - condition:
@@ -110,49 +111,81 @@ responses:
       text: "Usuario es el rol que recibe el usuario final que va a interactuar con el sistema, este va a tener permisos 
       solo a ver registros y reportes hechos por el sistema, no podrá cambiar las configuraciones de la PBX."
 
-#    - condition:
-#        - type: slot
-#          name: rol
-#          value: distribuidor
-#      text: "bbbbbbbb"
-#
-#    - condition:
-#        - type: slot
-#          name: rol
-#          value: administrador
-#      text: "aaaaaaaa"
+    - condition:
+        - type: slot
+          name: rol
+          value: distributor
+      text: "Distribuidor es el rol que se encarga de realizar las configuraciones básicas de la PBX según las necesidades 
+      de cada cliente o usuario final."
+
+    - condition:
+        - type: slot
+          name: rol
+          value: administrator
+      text: "Administrador es el ror encargado de la administración general de la Plataforma y del controlde todas las 
+      configuraciones avanzadas del sistema."
 
     - text: "Rol no definido"
-
-  utter_distributor:
-  - text: "Distribuidor es el rol que se encarga de realizar las configuraciones básicas de la PBX según las necesidades 
-  de cada cliente o usuario final."
-
-  utter_administrator:
-  - text: "rol Administrador es el administrador general de la Plataforma y el que lleva el control y la responsabilidad 
-  de todas las configuraciones avanzadas del sistema."
 
   utter_account:
   - text: "Una vez autenticado en la Plataforma se puede acceder a la aplicación Cuentas (si se tienen los permisos para 
   ello). Para acceder a la aplicación Cuentas debe seleccionar en el Panel superior derecho el ícono Aplicaciones y 
   seleccionar la App Cuentas."
+    image: 'assets/figures/figure_7.png'
+
+  utter_account_2:
+  - text: "Las opciones de la figura 7 permiten:	
+  1.	Buscar una cuenta.
+  2.	Añadir una nueva cuenta.
+  3.	Listado de cuentas existentes."
 
   utter_create_account:
-  - text: "Para crear una nueva cuenta se selecciona la opción Añadir nueva cuenta, la cual muestra la interfaz para 
+  - text: "Para crear una nueva cuenta se selecciona la opción añadir nueva cuenta, la cual muestra la interfaz para 
   crear una nueva cuenta que se divide en 6 pasos."
 
+  utter_create_account_1:
+  - text: "Paso 1: Definir ajustes generales de la cuenta."
+    image: 'assets/figures/figure_8.png'
+
+  utter_create_account_2:
+  - text: "Paso 2: Añadir información de contacto relativa a la cuenta"
+    image: 'assets/figures/figure_9.png'
+
+  utter_create_account_3:
+  - text: "Paso 3: Configurar los límites de línea y establecer restricciones de la cuenta"
+    image: 'assets/figures/figure_10.png'
+
+  utter_create_account_4:
+  - text: "Paso 4: Establecer saldo de crédito de cuenta inicial y configurar el acceso al centro de control"
+    image: 'assets/figures/figure_11.png'
+
+
+  utter_create_account_5:
+  - text: "Paso 5:"
+    image: 'assets/figures/figure_12.png'
+
+
+  utter_create_account_6:
+  - text: "Paso 6: Revisar y confirmar configuraciones de la cuenta"
+    image: 'assets/figures/figure_13.png'
+
   utter_edit_account:
-    - text: "Para editar una cuenta, en la interfaz de Cuenta se selecciona la cuenta que desea editar y cliquea sobre 
-    el ícono   de las opciones que desee cambiar, ver figura 14. Luego se despliega un conjunto de opciones correspondiente. 
-    Para guardar los cambios debe seleccionar Guardar o Actualizar."
+    - text: "Para editar una cuenta, en la interfaz cuenta se selecciona la cuenta que desea editar y cliquea sobre el 
+    ícono   de las opciones que desee cambiar. Luego se despliega un conjunto de opciones correspondiente."
       image: 'assets/figures/figure_14.jpg'
 
   utter_edit_account_2:
-    - text: "Figura 14. Editar cuenta."
+    - text: " Para guardar los cambios debe seleccionar Guardar o Actualizar."
       image: 'assets/figures/figure_15.png'
 
   utter_delete_account:
-  - text: "Si desea eliminar la cuenta debe seleccionar la opción Estado de la cuenta (1) y seleccionar el botón Eliminar (2), ver figura 15. Inmediatamente se muestra un mensaje para confirmar la eliminación de la cuenta, donde debe escribir la palabra “ELIMINAR” (1) y luego seleccionar Eliminar cuenta (3), ver figura 16."
+  - text: "Si desea eliminar la cuenta debe seleccionar la opción estado de la cuenta (1) y seleccionar el botón Eliminar (2)."
+    image: 'assets/figures/figure_15.png'
+
+  utter_delete_account_2:
+  - text: "Después seleccionar la opción eliminar, inmediatamente se muestra un mensaje para confirmar la eliminación de 
+  la cuenta, donde debe escribir la palabra “ELIMINAR” (1) y luego seleccionar Eliminar cuenta (3)."
+    image: 'assets/figures/figure_18.png'
 
   utter_number:
   - text: "Para acceder a la aplicación Número Virtual debe seleccionar en el panel superior derecho el ícono Aplicaciones   
@@ -391,14 +424,17 @@ Figura 61. Número de buzón de fax.
   Figura 67. Opciones avanzadas."
 
   utter_code:
-  - text: "La opción Códigos es una página informativa muestra los códigos numéricos con su función para realizar desvío de llamada, compartir escritorio, estacionar y recuperar llamada y otras opciones, ver figura 67. 
+  - text: "La opción Códigos es una página informativa muestra los códigos numéricos con su función para realizar desvío
+   de llamada, compartir escritorio, estacionar y recuperar llamada y otras opciones, ver figura 67. 
  
   Figura 68. Códigos."
 
   utter_registro:
-  - text: "Para acceder a la aplicación Registros debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Registros    . Luego se muestran los registros de las llamadas que se han realizado en la PBX, ver figura 68.
+  - text: "Para acceder a la aplicación Registros debe seleccionar en el panel superior derecho el ícono Aplicaciones     
+  y seleccionar el ícono perteneciente a Registros    . Luego se muestran los registros de las llamadas que se han realizado 
+  en la PBX.
  
-  Figura 69. Registros.
+
   Las opciones de la figura 68 permiten:
   1.	Buscar un registro determinado.
   2.	Cambiar opciones de cantidad de registros a mostrar por páginas, ver figura 69.
@@ -411,13 +447,17 @@ Figura 61. Número de buzón de fax.
   "
 
   utter_conmutadores:
-  - text: "Para acceder a la aplicación Conmutadores debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Conmutadores . Luego se muestran los registros de las llamadas que se han realizado en la PBX, ver figura 71.
- 
-  Figura 72. Conmutadores.
-  "
+  - text: "Para acceder a la aplicación Conmutadores debe seleccionar en el panel superior derecho el ícono Aplicaciones
+       y, luego, seleccionar el ícono perteneciente a Conmutadores. Luego se muestran los registros de las llamadas que 
+  se han realizado en la PBX."
+    image: 'assets/figures/figure_74.png'
 
   utter_voice_mail:
-  - text: "Para acceder a la aplicación correos de voz debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Correos de voz  . Luego se muestra un mensaje informativo con la cantidad de buzones de voz que se han creado en la PBX y un campo desglosable que lista estos buzones para seleccionar uno de ellos. Una vez seleccionado un buzón se muestra la información de dicho buzón la cual puede ser actualizada, filtrada, buscada y eliminada ver figura 72.
+  - text: "Para acceder a la aplicación correos de voz debe seleccionar en el panel superior derecho el ícono Aplicaciones
+       y seleccionar el ícono perteneciente a Correos de voz  . Luego se muestra un mensaje informativo con la cantidad 
+  de buzones de voz que se han creado en la PBX y un campo desglosable que lista estos buzones para seleccionar uno de ellos. 
+  Una vez seleccionado un buzón se muestra la información de dicho buzón la cual puede ser actualizada, filtrada, buscada 
+  y eliminada ver figura 72.
   Figura 73. Buzón de voz.
   "
 
@@ -578,16 +618,20 @@ Figura 61. Número de buzón de fax.
   Una vez creado se lista debajo de la opción Añadir y al seleccionarlo puede editarlo o eliminarlo.
   "
 
-  utter_trocales:
-  - text: "5.9 Troncales SIP
-  Para acceder a la aplicación Troncales SIP debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Troncales SIP . Luego se muestra un conjunto de recursos para configurar, ver figura 115.
-   
-  Figura 116. Troncales SIP.
-  5.9.1	Recurso local
-  Al seleccionar la opción Recursos locales se muestran las opciones: Buscar (1), Añadir (2), Regresar a la casa de los recursos (3), ver figura 116.
-   
-  Figura 117. Recursos locales.
-  Para crear una puerta de entrada menú debe seleccionar la opción Añadir (2), ver figura 116. Inmediatamente se muestran las opciones correspondientes, divididas en Básico (1), ver figura 117 y Avanzado (2), ver figura 118. En ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
+  utter_troncales:
+  - text: "Para acceder a la aplicación Troncales SIP debe seleccionar en el panel superior derecho el ícono Aplicaciones
+  y seleccionar el ícono perteneciente a Troncales SIP . Luego se muestra un conjunto de recursos para configurar."
+    image: 'assets/figures/figure_118.png'
+
+  utter_troncales_2:
+  - text: "Al seleccionar la opción Recursos locales se muestran las opciones: Buscar (1), Añadir (2), Regresar 
+  a la casa de los recursos (3)."
+    image: 'assets/figures/figure_119.png'
+
+  utter_troncales_3:
+  - text: "Para crear una puerta de entrada menú debe seleccionar la opción Añadir (2), ver figura 116. Inmediatamente 
+  se muestran las opciones correspondientes, divididas en Básico (1), ver figura 117 y Avanzado (2), ver figura 118. En 
+  ambas opciones se muestran un conjunto de campos a llenar con la información requerida.
    
   Figura 118. Añadir puerta de entrada. Opciones básicas.
    
@@ -596,16 +640,35 @@ Figura 61. Número de buzón de fax.
   "
 
   utter_csv:
-  - text: "Para acceder a la aplicación Incorporación de CSV debe seleccionar en el panel superior derecho el ícono Aplicaciones     y seleccionar el ícono perteneciente a Incorporación de CSV . Al mostrarse la interfaz correspondiente debe seleccionar una de las dos opciones Agregar usuario (1) o Agregar usuarios y dispositivos (2) ver figura 119.
+  - text: "Para acceder a la aplicación Incorporación de CSV debe seleccionar en el panel superior derecho el ícono Aplicaciones
+  y seleccionar el ícono perteneciente a Incorporación de CSV . Al mostrarse la interfaz correspondiente debe seleccionar 
+  una de las dos opciones Agregar usuario (1) o Agregar usuarios y dispositivos (2)."
+    image: 'assets/figures/figure_122.png'
+
+  utter_csv_add_user:
+  - text: "Al seleccionar la opción Agregar usuarios debe cargar el archivo CSV con los datos requeridos. El archivo CSV 
+  debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación 
+  tal y como se explica en la interfaz."
+    image: 'assets/figures/figure_121.png'
    
-  Figura 120. Interfaz principal de incorporación de CSV.
-  5.10.1	Agregar usuario
-  Si selecciona Añadir un usuario debe cargar el archivo CSV con los datos requeridos. El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación tal y como se explica en la interfaz, ver figura 120.
-   
-  Figura 121. Añadir usuario.
-  A la hora de crear el documento Exel con la información requerida debe guardarlo como tipo CSV para que cargue correctamente en el sistema, ver figura 121 y 122.
-   
-  Figura 122. Ejemplo de cómo debe ir estructurada la información en el Excel.
+  utter_csv_add_user_2:
+  - text: "A la hora de crear el documento Exel con la información requerida debe guardarlo como tipo CSV para que cargue 
+  correctamente en el sistema, ver figura 121 y 122."
+
+#  utter_csv_add_user_3:
+#  - text: ""
+#    image:
+#
+#  utter_csv_add_user_4:
+#  - text: ""
+#    image:
+#
+#  utter_csv_add_user_5:
+#  - text: ""
+#    image:
+
+  utter_csv_add_user_3:
+  - text: "  Figura 122. Ejemplo de cómo debe ir estructurada la información en el Excel.
    
   Figura 123. Modificar e tipo de archivo .excel a .csv
   Una vez cargado el documento en el sistema se muestra la información en columnas, ver figura 123 (1). Donde debe escoger la correspondencia de cada uno de los encabezados de las columnas, ver figura 123 (2 y 3).  Una vez este todo correcto se activará el botón Proceder, ver figura 123 (4).
@@ -641,17 +704,24 @@ Figura 61. Número de buzón de fax.
   5.10.2 Agregar usuarios y dispositivos
   Para Añadir un usuario y dispositivo (2), ver figura 119 debe cargar el archivo CSV con los datos requeridos. El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido correo electrónico, extensión y correo de notificación tal y como se explica en la interfaz, ver figura 125. Llevar acabo el mismo procedimiento para Añadir un usuario descrito anteriormente. 
    
-  Figura 126. Agregar usuarios y dispositivos
-  "
+  Figura 126. Agregar usuarios y dispositivos"
+#    image:
+
+  utter_csv_add_devise:
+  - text: "Al seleccionar la opción Añadir usuarios y dispositivos debe cargar el archivo CSV con los datos requeridos. 
+  El archivo CSV debe ser un documento Excel compuesto por nombre de usuario, apellido, contraseña, correo electrónico, 
+  extensión y correo electrónico de notificación, dirección MAC, marca, familia y modelo como se explica en la interfaz."
+    image: 'assets/figures/figure_128.png'
 
   utter_monitor:
-  - text: "La app Monitor permite acceder a Grafana un software libre que permite la visualización y el formato de datos métricos a través de gráficos. 
-  En la figura 126 se muestra el Panel de Control donde se puede escoger los distintos gráficos informativos, ver figura 127.
-   
-  Figura 127. Panel de Control.
-   
-  Figura 128. Gráficos.
-  "
+  - text: "La app Monitor permite acceder a Grafana un software libre que permite la visualización y el formato de datos
+   métricos a través de gráficos. A continuación se muestra el Panel de Control donde se puede escoger los distintos 
+   gráficos informativos."
+    image: 'assets/figures/figure_130.png'
+
+  utter_monitor_2:
+  - text:  "ver figura 127.  Figura 128. Gráficos."
+    image: 'assets/figures/figure_131.png'
 
   utter_error:
   - text: "Con el objetivo de garantizar que la información almacenada en el sistema sea útil para el análisis, se establecen reglas asociadas al proceso, formato y sintaxis, las cuales serán especificadas en este acápite. 
@@ -678,19 +748,7 @@ Figura 61. Número de buzón de fax.
   Figura 133. Advertencia de seguridad.
   •	Cuando el servidor web no se puede conectar a la base de datos, el sistema mostrará un error, ver figura 133.
    
-  Figura 134. Error del sistema.
-  
-  "
-
-
-
-
-
-
-
-
-
-
+  Figura 134. Error del sistema."
 
 session_config:
   session_expiration_time: 60

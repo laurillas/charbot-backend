@@ -146,30 +146,12 @@ nlu:
 
 - intent: access
   examples: |
-    - ¿cómo acceder?
+    - ¿cómo acceder a platel?
 
 - intent: rol
   examples: |
     - rol
     - roles
-
-#- intent: inform
-#  examples: |
-#    - user
-#    - distribuidor
-#    - administrador
-
-#- intent: user
-#  examples: |
-#    - usuario
-#
-#- intent: administrator
-#  examples: |
-#    - administrador
-#
-#- intent: distributor
-#  examples: |
-#    - distribuidor
 
 - intent: create_account
   examples: |
@@ -202,4 +184,65 @@ nlu:
 - intent: number
   examples: |
     - número
-    -
+
+- intent: call
+  examples: |
+    - llamada
+
+- intent: device
+  examples: |
+    - dispositivo
+
+- intent: intelligent_PBX
+  examples: |
+    - pbx inteligente
+
+- intent: tablero
+  examples: |
+    - tablero
+
+- intent: groups
+  examples: |
+    - grupos
+
+- intent: buzon
+  examples: |
+    - buzon
+
+- intent: code
+  examples: |
+    - codigo
+
+- intent: registro
+  examples: |
+    - registro
+
+- intent: conmutador
+  examples: |
+    - conmutador
+
+- intent: callflowsng
+  examples: |
+    - callflowsng
+    - flujo de llamada
+
+- intent: troncales
+  examples: |
+    - troncales
+
+- intent: csv
+  examples: |
+    - csv
+
+- intent: monitor
+  examples: |
+    - monitor
+
+- intent: error
+  examples: |
+    - error
+
+- intent: voice_mail
+  examples: |
+    - mensaje de voz
+    - audio
